@@ -1,23 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import { Segmented } from 'antd';
+import LatestContents from './pages/contents';
+import { FloatButton } from 'antd';
+import { UnorderedListOutlined, SettingOutlined } from "@ant-design/icons";
+
+const menus = [
+  {
+    icon: <UnorderedListOutlined />,
+    value: "Timeline"
+  },
+  {
+    icon: <SettingOutlined />,
+    value: "Settings"
+  }
+]
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div>
+      <header className='header'>
+        <Segmented
+          size='large'
+          options={menus} />
       </header>
+      <main>
+        <LatestContents />
+        <FloatButton.BackTop />
+      </main>
+      <footer></footer>
+
+
     </div>
   );
 }
