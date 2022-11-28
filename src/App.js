@@ -1,16 +1,16 @@
 import './App.css';
 import { Segmented } from 'antd';
 import LatestContents from './pages/contents';
-import { FloatButton } from 'antd';
+import { FloatButton, Affix } from 'antd';
 import { UnorderedListOutlined, SettingOutlined } from "@ant-design/icons";
 
 const menus = [
   {
-    icon: <UnorderedListOutlined />,
+    label: <UnorderedListOutlined />,
     value: "Timeline"
   },
   {
-    icon: <SettingOutlined />,
+    label: <SettingOutlined />,
     value: "Settings"
   }
 ]
@@ -19,16 +19,24 @@ const menus = [
 function App() {
   return (
     <div>
-      <header className='header'>
-        <Segmented
-          size='large'
-          options={menus} />
+
+      <header >
+
+
+
       </header>
+
       <main>
         <LatestContents />
         <FloatButton.BackTop />
       </main>
-      <footer></footer>
+      <footer className='footer'>
+        <Affix offsetBottom={5}>
+          <Segmented
+          size='large'
+          options={menus} /></Affix>
+
+      </footer>
 
 
     </div>

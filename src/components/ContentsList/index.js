@@ -50,7 +50,7 @@ const Content = ({ data, index }) => {
 
     const Images = ({ data }) => {
         return <Image.PreviewGroup>
-            {data.map((image, index) => <Image key={index} width={150} height={150} src={image.file_url} />)}
+            {data.map((image, index) => <Image key={index} width={200} height={150} src={image.file_url} />)}
         </Image.PreviewGroup>
     }
 
@@ -73,6 +73,7 @@ const ContentsList = ({ items = [] }) => {
 
 
         <List
+            size='small'
             itemLayout="vertical"
             dataSource={items}
             renderItem={(item) => {
