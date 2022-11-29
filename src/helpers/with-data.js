@@ -1,6 +1,6 @@
-import React from 'react';
-import { client } from './init-apollo';
-import { ApolloProvider } from '@apollo/client';
+import React from "react";
+import { client } from "./init-apollo";
+import { ApolloProvider } from "@apollo/client";
 
 /**
  * The function takes in a component and returns a new component that wraps the original component.

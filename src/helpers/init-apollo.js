@@ -1,5 +1,11 @@
-import { ApolloClient, InMemoryCache, HttpLink, ApolloLink, concat } from '@apollo/client';
-import { onError } from '@apollo/client/link/error';
+import {
+  ApolloClient,
+  InMemoryCache,
+  HttpLink,
+  ApolloLink,
+  concat,
+} from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
 // import { SSOLogin } from './sso/sso';
 
 const httpLink = new HttpLink({ uri: process.env.REACT_APP_GRAPHQL_BASE_URL });
@@ -9,7 +15,7 @@ const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers = {} }) => ({
     headers: {
       ...headers,
-      'x-token': localStorage.getItem('x-token') || undefined,
+      "x-token": localStorage.getItem("x-token") || undefined,
     },
   }));
 
@@ -28,12 +34,12 @@ export const client = new ApolloClient({
   }),
   defaultOptions: {
     watchQuery: {
-      fetchPolicy: 'no-cache',
-      errorPolicy: 'none',
+      fetchPolicy: "no-cache",
+      errorPolicy: "none",
     },
     query: {
-      fetchPolicy: 'no-cache',
-      errorPolicy: 'none',
+      fetchPolicy: "no-cache",
+      errorPolicy: "none",
     },
   },
 });

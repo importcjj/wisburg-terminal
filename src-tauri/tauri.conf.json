@@ -29,7 +29,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "com.wisburg.terminal",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -58,8 +58,9 @@
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "Wisburg Terminal",
-        "width": 800
+        "title": "Wisburg Terminal",  
+        "width": 800,
+        "theme": "Dark"
       }
     ]
   }

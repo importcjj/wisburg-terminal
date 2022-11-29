@@ -1,12 +1,12 @@
 .news {
-    margin: auto;
-    padding: 10px;
+  margin: auto;
+  padding: 10px;
 }
 
 .news .header {
-    text-align: center;
+  text-align: center;
 }
-    
+
 .news h1 {
-    font-size: 25px;
+  font-size: 25px;
 }
