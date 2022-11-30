@@ -49,7 +49,7 @@ const LatestContents = () => {
             page_info: { end_cursor, has_next_page },
           } = data.contents;
           if (items.length == 0 ) {return}
-          setLatests([...latests, ...items])
+          setLatests([...items.reverse(), ...latests])
           setTail(setTail);
 
         }
