@@ -13,7 +13,7 @@ root.render(
   // <React.StrictMode>
   <ConfigProvider
     theme={{
-      // algorithm: theme.darkAlgorithm,
+      algorithm: theme.darkAlgorithm,
     }}
   >
     <WithData>
