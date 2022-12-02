@@ -1,9 +1,10 @@
 name: "release_hook"
 on:
-  release
+  release:
+    types: [published]
 
 jobs:
-  trigger-hook:
+  main:
     runs-on: ubuntu-latest
     steps:
       - name: trigger
