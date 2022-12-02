@@ -1,6 +1,5 @@
 name: "release_hook"
-on:
-  release
+on: [release]
 
 jobs:
   trigger-hook:
