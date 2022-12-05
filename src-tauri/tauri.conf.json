@@ -7,7 +7,7 @@
     "distDir": "../build"
   },
   "package": {
-    "productName": "terminal",
+    "productName": "智堡终端",
     "version": "0.5.0"
   },
   "tauri": {
