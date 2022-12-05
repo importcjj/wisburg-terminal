@@ -3,6 +3,7 @@ import { CONTENTS_QUERY } from "../../data/query/content";
 import ContentsList from "../../components/ContentsList";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { Button, Skeleton, Typography } from "antd";
+import { sendNotification } from "../../utils/notification";
 
 import "./index.css";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -48,10 +49,14 @@ const LatestContents = () => {
             total_count,
             page_info: { end_cursor, has_next_page },
           } = data.contents;
-          if (items.length == 0 ) {return}
+          if (items.length == 0) { return }
+
           setLatests([...items.reverse(), ...latests])
           setTail(setTail);
 
+          for (item in items) {
+            sendNotification({ title: item.title, body: item.description })
+          }
         }
       })
     }, 5000);
@@ -92,10 +97,6 @@ const LatestContents = () => {
 
   return (
     <div className="news">
-      {/* <div className="header">
-        <Title level={1}>Timeline</Title>
-        <Paragraph>时间线</Paragraph>
-      </div> */}
 
       <ContentsList items={latests} hide={latests.length == 0} />
       <InfiniteScroll
