@@ -61,10 +61,12 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
+        "height": 700,
+        "minHeight": 600,
         "resizable": true,
-        "title": "Wisburg Terminal",  
-        "width": 800,
+        "title": "智堡终端",  
+        "width": 1000,
+        "minWidth": 800,
         "theme": "Dark"
       }
     ]
