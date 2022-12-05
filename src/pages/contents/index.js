@@ -92,10 +92,10 @@ const LatestContents = () => {
 
   return (
     <div className="news">
-      <div className="header">
+      {/* <div className="header">
         <Title level={1}>Timeline</Title>
         <Paragraph>时间线</Paragraph>
-      </div>
+      </div> */}
 
       <ContentsList items={latests} hide={latests.length == 0} />
       <InfiniteScroll
