@@ -1,25 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import WithData from "./helpers/with-data";
 import "antd/dist/reset.css";
 import "./index.css";
 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ConfigProvider, theme } from "antd";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
-  <ConfigProvider
-    theme={{
-      algorithm: theme.darkAlgorithm,
-    }}
-  >
-    <WithData>
-      <App />
-    </WithData>
-  </ConfigProvider>
+  <App />
   // </React.StrictMode>
 );
 

@@ -54,7 +54,7 @@ const LatestContents = () => {
           setLatests([...items.reverse(), ...latests])
           setTail(setTail);
 
-          for (item in items) {
+          for (const item in items) {
             sendNotification({ title: item.title, body: item.description })
           }
         }

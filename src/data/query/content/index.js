@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const CONTENTS_QUERY = gql`
-query GetContnets($first: Int = 20, $after: String, $sortBy: String) {
-  contents(first: $first, after: $after, sort_by: $sortBy) {
+query GetContnets($first: Int = 20, $offset: Int=0, $after: String, $sortBy: String) {
+  contents(first: $first, offset: $offset, after: $after, sort_by: $sortBy) {
     total_count
     items {
       title
