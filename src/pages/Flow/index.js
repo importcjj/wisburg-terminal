@@ -128,7 +128,7 @@ export default () => {
     return (
         <div >
             <Table
-                style={{ padding: 20 }}
+                style={{ padding: 5 }}
                 columns={columns}
                 dataSource={data}
                 bordered

@@ -7,27 +7,27 @@ th.ant-table-cell {
     cursor: pointer;
     text-align: center;
     border: 2px solid #eb1c24 !important;
-    border-inline-end: none !important;
+    /* border-inline-end: none !important; */
 }
 
 .ant-table-tbody > tr > td.flow-cell-title {
     border: 2px solid #eb1c24 !important;
     border-top: none !important;
-    border-inline-end: none !important;
+    /* border-inline-end: none !important; */
     color: #eb1c24;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .ant-table-thead > tr > th.flow-cell-category {
     border: 2px solid #f97c23 !important;
-    border-inline-end: none !important;
+    /* border-inline-end: none !important; */
 }
 
 .ant-table-tbody > tr > td.flow-cell-category {
     border: 2px solid #f97c23 !important;
     border-top: none !important;
-    border-inline-end: none !important;
+    /* border-inline-end: none !important; */
     color: #f97c23;
 }
 
