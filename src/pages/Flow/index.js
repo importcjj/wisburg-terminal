@@ -1,7 +1,7 @@
 import { CalendarOutlined, FilterOutlined, SearchOutlined } from "@ant-design/icons";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { Button, Input, Space, Table, DatePicker, Pagination, Affix } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TimeAgo from "timeago-react";
 import { CONTENTS_QUERY } from "../../data/query/content";
 import dayjs from 'dayjs';
@@ -33,6 +33,7 @@ const rangePresets = [
 export default () => {
     const [data, setData] = useState([])
     const [titleInput, setTitleInput] = useState(true)
+    const searchInput = useRef(null);
     const [pagination, setPagination] = useState({
         current: 1,
         pageSize: 25,
@@ -82,12 +83,17 @@ export default () => {
             className: 'flow-cell-title',
             filterDropdown: () => {
                 return <div style={{ padding: 8 }}>
-                    <Input style={{ marginBottom: 8 }} />
+                    <Input placeholder="标题关键词搜索" ref={searchInput} style={{ marginBottom: 8 }} />
                     <Space>
                         <Button size="small" type="primary">搜索</Button>
                         <Button size="small">重置</Button>
                     </Space>
                 </div>
+            },
+            onFilterDropdownOpenChange: (visible) => {
+                if (visible)  {
+                    setTimeout(() => searchInput.current?.select(), 100);
+                }
             },
             filterIcon: <Space><SearchOutlined /> 搜索</Space>
         },
