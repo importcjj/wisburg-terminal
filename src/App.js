@@ -6,8 +6,8 @@ import { UnorderedListOutlined, SettingOutlined } from "@ant-design/icons";
 import { ConfigProvider, theme } from "antd";
 import Flow from "./pages/Flow";
 import WithData from "./helpers/with-data";
-import enUS from 'antd/locale/en_US';
-import zhCN from 'antd/locale/zh_CN';
+import enUS from "antd/locale/en_US";
+import zhCN from "antd/locale/zh_CN";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 
@@ -23,8 +23,8 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem('时间线', '1', <UnorderedListOutlined />),
-  getItem('设置', '2', <SettingOutlined />),
+  getItem("时间线", "1", <UnorderedListOutlined />),
+  // getItem('设置', '2', <SettingOutlined />),
   // getItem('User', 'sub1', <UserOutlined />, [
   //   getItem('Tom', '3'),
   //   getItem('Bill', '4'),
@@ -34,12 +34,11 @@ const items = [
   // getItem('Files', '9', <FileOutlined />),
 ];
 function App() {
-
   const [locale, setLocal] = useState(zhCN);
 
   useEffect(() => {
-    dayjs.locale('zh-cn');
-  }, [])
+    dayjs.locale("zh-cn");
+  }, []);
 
   return (
     <ConfigProvider
@@ -50,8 +49,20 @@ function App() {
     >
       <WithData>
         <Layout hasSider>
-          <Sider collapsed style={{ backgroundColor: '#141414', zIndex: 2, overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0 }}>
-            <Menu defaultSelectedKeys={['1']} items={items} />
+          <Sider
+            collapsed
+            style={{
+              backgroundColor: "#141414",
+              zIndex: 2,
+              overflow: "auto",
+              height: "100vh",
+              position: "fixed",
+              left: 0,
+              top: 0,
+              bottom: 0,
+            }}
+          >
+            <Menu defaultSelectedKeys={["1"]} items={items} />
           </Sider>
           <Layout style={{ marginLeft: 80 }}>
             {/* <Header></Header> */}
@@ -59,9 +70,7 @@ function App() {
               <Flow />
               <FloatButton.BackTop />
             </Content>
-            <Footer className="footer">
-
-            </Footer>
+            <Footer className="footer"></Footer>
           </Layout>
         </Layout>
       </WithData>

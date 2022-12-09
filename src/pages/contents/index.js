@@ -10,7 +10,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 const { Title, Paragraph } = Typography;
 
-
 const LatestContents = () => {
   const [contents, setContents] = React.useState([]);
   const [latests, setLatests] = React.useState([]);
@@ -24,19 +23,21 @@ const LatestContents = () => {
       first: 1,
     },
     onCompleted: (data) => {
-      const { page_info: { end_cursor } } = data.contents;
+      const {
+        page_info: { end_cursor },
+      } = data.contents;
 
       setTail(end_cursor);
-    }
+    },
   });
 
   React.useEffect(() => {
     let i = setInterval(() => {
       if (!tail) {
-        console.count("skip fetch latest")
-        return
+        console.count("skip fetch latest");
+        return;
       }
-      console.count(tail)
+      console.count(tail);
       fetchLatest({
         variables: {
           first: 10,
@@ -49,20 +50,21 @@ const LatestContents = () => {
             total_count,
             page_info: { end_cursor, has_next_page },
           } = data.contents;
-          if (items.length == 0) { return }
+          if (items.length == 0) {
+            return;
+          }
 
-          setLatests([...items.reverse(), ...latests])
+          setLatests([...items.reverse(), ...latests]);
           setTail(setTail);
 
           for (const item in items) {
-            sendNotification({ title: item.title, body: item.description })
+            sendNotification({ title: item.title, body: item.description });
           }
-        }
-      })
+        },
+      });
     }, 5000);
-    return () => clearInterval(i)
-  }, [tail])
-
+    return () => clearInterval(i);
+  }, [tail]);
 
   const [fetch, { loading }] = useLazyQuery(CONTENTS_QUERY, {
     variables: {
@@ -79,14 +81,13 @@ const LatestContents = () => {
       setAfter(end_cursor);
       setHasMore(has_next_page);
     },
-    onError: (error) => { },
+    onError: (error) => {},
   });
 
   React.useEffect(() => {
     fetch();
     fetchLatest();
-  }, [])
-
+  }, []);
 
   const loadMoreData = () => {
     if (loading) {
@@ -97,7 +98,6 @@ const LatestContents = () => {
 
   return (
     <div className="news">
-
       <ContentsList items={latests} hide={latests.length == 0} />
       <InfiniteScroll
         dataLength={contents.length}

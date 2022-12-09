@@ -7,12 +7,9 @@ import { FilePdfOutlined } from "@ant-design/icons";
 import { downloadFile } from "../../utils/fs";
 import TimeAgo from "timeago-react";
 
-
-
 const { Paragraph, Title } = Typography;
 
 const Content = ({ data }) => {
-
   const category = React.useMemo(() => {
     if (data.detail?.extension === ".pdf") {
       return <FilePdfOutlined />;
@@ -30,11 +27,7 @@ const Content = ({ data }) => {
 
   const actions = React.useMemo(() => {
     const actions = [
-      <TimeAgo
-        className="datetime"
-        datetime={data.datetime}
-        locale="zh_CN"
-      />
+      <TimeAgo className="datetime" datetime={data.datetime} locale="zh_CN" />,
     ];
     if (data.detail?.source_url) {
       actions.push(
@@ -79,7 +72,7 @@ const Content = ({ data }) => {
 };
 
 const ContentsList = ({ items = [], hide }) => {
-  if (hide) return <></>
+  if (hide) return <></>;
 
   return (
     <List
