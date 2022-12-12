@@ -2,6 +2,8 @@ import {
   CalendarOutlined,
   FilePdfOutlined,
   FilterOutlined,
+  LinkOutlined,
+  PlayCircleOutlined,
   SearchOutlined,
   ShareAltOutlined,
   VideoCameraOutlined,
@@ -21,8 +23,10 @@ import TimeAgo from "timeago-react";
 import { CONTENTS_QUERY } from "../../data/query/content";
 import dayjs from "dayjs";
 import { downloadFile } from "../../utils/fs";
+import { registerAll } from "@tauri-apps/api/globalShortcut";
 
 import "./index.css";
+import moment from "moment";
 
 const { RangePicker } = DatePicker;
 
@@ -58,6 +62,24 @@ export default () => {
     pageSizeOptions: [25, 50, 100],
     total: 0,
   });
+
+  // useEffect(async ()=> {
+  //   await registerAll(['Right', 'Left'], (key) => {
+  //     switch (key) {
+  //       case 'Right':
+  //         setPagination((p)=> {return {...p, current: p.current + 1}})
+  //         break;
+  //       case 'Left':
+  //         setPagination((p)=> {return {...p, current: p.current > 1 ? p.current - 1 : p.current}})
+  //         break
+
+  //       default:
+  //         break;
+  //     }
+
+  //   });
+
+  // }, []);
 
   const { loading, refetch } = useQuery(CONTENTS_QUERY, {
     variables: {
@@ -114,7 +136,11 @@ export default () => {
   };
 
   const handleTableChange = (pagination, filters, sorter) => {
-    setKinds(filters?.kind[0]);
+    if (filters?.kind) {
+      setKinds(filters?.kind[0]);
+    } else {
+      setKinds(null);
+    }
   };
 
   const columns = [
@@ -165,9 +191,10 @@ export default () => {
         selectedKeys,
         confirm,
         clearFilters,
+        close,
       }) => {
         return (
-          <div style={{ padding: 8 }}>
+          <div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}>
             <Input
               placeholder="标题关键词搜索"
               ref={searchInput}
@@ -228,13 +255,12 @@ export default () => {
       ],
 
       render: (_, item) => {
-        console.log(item);
         switch (item.kind) {
           case 1:
           case 2:
-            return <ShareAltOutlined />;
+            return <LinkOutlined />;
           case 3:
-            return <VideoCameraOutlined />;
+            return <PlayCircleOutlined />;
           case 9:
             return <FilePdfOutlined />;
 
@@ -292,9 +318,16 @@ export default () => {
           </div>
         );
       },
-      render: (dt) => (
-        <TimeAgo className="datetime" datetime={dt} locale="zh_CN" />
-      ),
+      render: (dt) => {
+        let d = moment(dt);
+        if (d.isSame(new Date(), "day")) {
+          return <TimeAgo className="datetime" datetime={dt} locale="zh_CN" />;
+        } else if (d.isSame(new Date(), "year")) {
+          return d.format("MM-DD HH:mm");
+        } else {
+          return d.format("YYYY-MM-DD HH:mm");
+        }
+      },
     },
   ];
 
