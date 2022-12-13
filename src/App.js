@@ -1,15 +1,13 @@
 import "./App.css";
-import { Segmented } from "antd";
-import LatestContents from "./pages/contents";
 import { FloatButton, Affix, Layout, Menu } from "antd";
 import { UnorderedListOutlined, SettingOutlined } from "@ant-design/icons";
 import { ConfigProvider, theme } from "antd";
-import Flow from "./pages/Flow";
 import WithData from "./helpers/with-data";
-import enUS from "antd/locale/en_US";
 import zhCN from "antd/locale/zh_CN";
-import dayjs from "dayjs";
+
 import { useEffect, useState } from "react";
+import { useAuth } from "./hooks/useAuth";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -23,22 +21,31 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem("时间线", "1", <UnorderedListOutlined />),
-  // getItem('设置', '2', <SettingOutlined />),
-  // getItem('User', 'sub1', <UserOutlined />, [
-  //   getItem('Tom', '3'),
-  //   getItem('Bill', '4'),
-  //   getItem('Alex', '5'),
-  // ]),
-  // getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  // getItem('Files', '9', <FileOutlined />),
+  getItem("时间线", "flow", <UnorderedListOutlined />),
+  getItem("设置", "settings", <SettingOutlined />),
 ];
 function App() {
   const [locale, setLocal] = useState(zhCN);
+  const { token } = useAuth();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    dayjs.locale("zh-cn");
-  }, []);
+  if (!token) {
+    return <Navigate to="/login" />;
+  }
+
+  const handleMenuClick = ({ item, key, keyPath, domEvent }) => {
+    switch (key) {
+      case "flow":
+        navigate("/");
+        break;
+      case "settings":
+        navigate("/settings");
+        break;
+
+      default:
+        break;
+    }
+  };
 
   return (
     <ConfigProvider
@@ -62,12 +69,15 @@ function App() {
               bottom: 0,
             }}
           >
-            <Menu defaultSelectedKeys={["1"]} items={items} />
+            <Menu
+              defaultSelectedKeys={["flow"]}
+              items={items}
+              onClick={handleMenuClick}
+            />
           </Sider>
           <Layout style={{ marginLeft: 80 }}>
-            {/* <Header></Header> */}
             <Content>
-              <Flow />
+              <Outlet />
               <FloatButton.BackTop />
             </Content>
             <Footer className="footer"></Footer>
