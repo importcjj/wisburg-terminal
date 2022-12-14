@@ -1,11 +1,17 @@
 import "./App.css";
-import { FloatButton, Affix, Layout, Menu } from "antd";
+import {
+  FloatButton,
+  Layout,
+  Menu,
+  Button,
+  ConfigProvider,
+  theme,
+} from "antd";
 import { UnorderedListOutlined, SettingOutlined } from "@ant-design/icons";
-import { ConfigProvider, theme } from "antd";
 import WithData from "./helpers/with-data";
 import zhCN from "antd/locale/zh_CN";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 
@@ -22,11 +28,11 @@ function getItem(label, key, icon, children) {
 
 const items = [
   getItem("时间线", "flow", <UnorderedListOutlined />),
-  getItem("设置", "settings", <SettingOutlined />),
+  // getItem("设置", "settings", <SettingOutlined />),
 ];
 function App() {
   const [locale, setLocal] = useState(zhCN);
-  const { token } = useAuth();
+  const { token, logout } = useAuth();
   const navigate = useNavigate();
 
   if (!token) {
@@ -74,6 +80,18 @@ function App() {
               items={items}
               onClick={handleMenuClick}
             />
+            <div
+              style={{
+                position: "fixed",
+                bottom: 10,
+                textAlign: "center",
+                width: 80,
+              }}
+            >
+              <Button type="text" onClick={logout}>
+                登出
+              </Button>
+            </div>
           </Sider>
           <Layout style={{ marginLeft: 80 }}>
             <Content>

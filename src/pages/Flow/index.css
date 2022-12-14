@@ -1,3 +1,7 @@
+.flow-box {
+  margin-bottom: 10px;
+}
+
 th.ant-table-cell {
   border-radius: 0px !important;
 }
@@ -20,6 +24,8 @@ th.ant-table-cell {
 
 .ant-table-tbody > tr > td.flow-cell-title a {
   color: #eb1c24;
+  width: 100%;
+  display: inline-block;
 }
 
 .ant-table-thead > tr > th.flow-cell-category {

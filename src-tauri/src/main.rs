@@ -4,12 +4,10 @@
 )]
 
 use std::{io::Cursor, fmt::Debug};
-use tauri_plugin_store::PluginBuilder;
 
 
 fn main() {
   tauri::Builder::default()
-    .plugin(PluginBuilder::default().build())
     .invoke_handler(tauri::generate_handler![download_file])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");

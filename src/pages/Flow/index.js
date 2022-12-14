@@ -32,7 +32,7 @@ const { RangePicker } = DatePicker;
 
 const rangePresets = [
   {
-    label: "近一周",
+    label: "近7天",
     value: [dayjs().add(-7, "d"), dayjs()],
   },
   {
@@ -62,24 +62,6 @@ export default () => {
     pageSizeOptions: [25, 50, 100],
     total: 0,
   });
-
-  // useEffect(async ()=> {
-  //   await registerAll(['Right', 'Left'], (key) => {
-  //     switch (key) {
-  //       case 'Right':
-  //         setPagination((p)=> {return {...p, current: p.current + 1}})
-  //         break;
-  //       case 'Left':
-  //         setPagination((p)=> {return {...p, current: p.current > 1 ? p.current - 1 : p.current}})
-  //         break
-
-  //       default:
-  //         break;
-  //     }
-
-  //   });
-
-  // }, []);
 
   const { loading, refetch } = useQuery(CONTENTS_QUERY, {
     variables: {
@@ -290,6 +272,7 @@ export default () => {
           <div style={{ padding: 8 }}>
             <div>
               <RangePicker
+                ref={searchInput}
                 style={{ marginBottom: 8 }}
                 presets={rangePresets}
                 value={selectedKeys}
@@ -318,6 +301,7 @@ export default () => {
           </div>
         );
       },
+
       render: (dt) => {
         let d = moment(dt);
         if (d.isSame(new Date(), "day")) {
@@ -332,7 +316,7 @@ export default () => {
   ];
 
   return (
-    <div>
+    <div className="flow-box">
       <Table
         style={{ padding: 5 }}
         columns={columns}

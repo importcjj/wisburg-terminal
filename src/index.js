@@ -27,6 +27,8 @@ const getUserData = async () => {
     await getProfile();
     return null;
   } catch (e) {
+    window.localStorage.setItem('x-token', null);
+    window.localStorage.setItem('user', null);
     return null;
   }
 };
