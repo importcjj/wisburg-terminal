@@ -20,6 +20,15 @@ import "./index.css";
 import { getProfile } from "./data/restful/auth";
 import Settings from "./pages/Settings";
 
+// With the Tauri API npm package:
+import { invoke } from "@tauri-apps/api/tauri";
+
+document.addEventListener("DOMContentLoaded", () => {
+  // This will wait for the window to load, but you could
+  // run this function on whatever trigger you want
+  setTimeout(() => invoke("close_splashscreen"), 1000);
+});
+
 dayjs.locale("zh-cn");
 
 const getUserData = async () => {
@@ -27,8 +36,8 @@ const getUserData = async () => {
     await getProfile();
     return null;
   } catch (e) {
-    window.localStorage.setItem('x-token', null);
-    window.localStorage.setItem('user', null);
+    window.localStorage.setItem("x-token", null);
+    window.localStorage.setItem("user", null);
     return null;
   }
 };

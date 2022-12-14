@@ -1,12 +1,5 @@
 import "./App.css";
-import {
-  FloatButton,
-  Layout,
-  Menu,
-  Button,
-  ConfigProvider,
-  theme,
-} from "antd";
+import { FloatButton, Layout, Menu, Button, ConfigProvider, theme } from "antd";
 import { UnorderedListOutlined, SettingOutlined } from "@ant-design/icons";
 import WithData from "./helpers/with-data";
 import zhCN from "antd/locale/zh_CN";
