@@ -13,7 +13,7 @@ export const AuthProvider = ({ children, userData }) => {
   const login = async ({ password, phone_number }) => {
     let { token, user } = await auth({
       password,
-      phone_number,
+      phone_number: Number.parseInt(phone_number),
       country_code: 86,
     });
     setToken(token);

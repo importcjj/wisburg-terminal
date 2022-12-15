@@ -48,7 +48,6 @@ const Login = () => {
       >
         <Form.Item
           name="phone_number"
-          normalize={(v) => Number.parseInt(v)}
           rules={[
             {
               required: true,
@@ -58,7 +57,7 @@ const Login = () => {
         >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="账号"
+            placeholder="手机号"
           />
         </Form.Item>
         <Form.Item
