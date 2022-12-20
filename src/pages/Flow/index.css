@@ -1,10 +1,15 @@
 
 :root {
+  --flow-table-border-width: 1px;
   --flow-table-border-color: rgba(255, 255, 255, 0.2)
 }
 
 .flow-box {
   margin-bottom: 10px;
+}
+
+.ant-table {
+  background-color: #000 !important;
 }
 
 th.ant-table-cell {
@@ -14,12 +19,12 @@ th.ant-table-cell {
 .ant-table-thead > tr > th.flow-cell-title {
   cursor: pointer;
   text-align: center;
-  border: 2px solid var(--flow-table-border-color) !important;
+  border: var(--flow-table-border-width) solid var(--flow-table-border-color) !important;
   border-inline-end: none !important;
 }
 
 .ant-table-tbody > tr > td.flow-cell-title {
-  border: 2px solid var(--flow-table-border-color) !important;
+  border: var(--flow-table-border-width) solid var(--flow-table-border-color) !important;
   border-top: none !important;
   border-inline-end: none !important;
   cursor: pointer;
@@ -34,22 +39,22 @@ th.ant-table-cell {
 }
 
 .ant-table-thead > tr > th.flow-cell-category {
-  border: 2px solid var(--flow-table-border-color) !important;
+  border: var(--flow-table-border-width) solid var(--flow-table-border-color) !important;
   border-inline-end: none !important;
 }
 
 .ant-table-tbody > tr > td.flow-cell-category {
-  border: 2px solid var(--flow-table-border-color) !important;
+  border: var(--flow-table-border-width) solid var(--flow-table-border-color) !important;
   border-top: none !important;
   border-inline-end: none !important;
 }
 
 .ant-table-thead > tr > th.flow-cell-datetime {
-  border: 2px solid var(--flow-table-border-color) !important;
+  border: var(--flow-table-border-width) solid var(--flow-table-border-color) !important;
 }
 
 .ant-table-tbody > tr > td.flow-cell-datetime {
-  border: 2px solid var(--flow-table-border-color) !important;
+  border: var(--flow-table-border-width) solid var(--flow-table-border-color) !important;
   border-top: none !important;
 }
 
