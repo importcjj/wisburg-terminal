@@ -103,6 +103,7 @@ export default () => {
       setStartTime(selectedKeys[0]);
       setEndTime(selectedKeys[1]);
     }
+    setPagination({...pagination, current: 1})
   };
 
   const handleReset = (clearFilters, confirm, setSelectedKeys, dataIndex) => {
