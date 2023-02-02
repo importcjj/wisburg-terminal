@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Alert, Button, Checkbox, Form, Input, message } from "antd";
+import { Button, Checkbox, Form, Input, message } from "antd";
 import { useAuth } from "../../hooks/useAuth";
 
 import "./index.css";
@@ -32,11 +32,13 @@ const Login = () => {
           content: `登录失败: ${e}`,
         });
       })
-      .finally(() => {});
+      .finally(() => { });
   };
   return (
     <div className="login-box">
+      {window.location.toString()}
       {contextHolder}
+      <iframe id="wechat-qrcode" allowtransparency="true" scrolling="no" frameBorder={0} height={300} width={200} style={{ overflow: "hidden" }} src="https://open.weixin.qq.com/connect/qrconnect?appid=wxe7d39940a780faf7&redirect_uri=https%3A%2F%2Fwww.wisburg.com%2Fwechat.html%3Fredirect_to%3Dhttps%3A%2F%2Fwww.wisburg.com%2F?action=terminal-login&response_type=code&scope=snsapi_login&state=wx_login&style=white&href=data:text/css;base64,LmltcG93ZXJCb3ggLnFyY29kZSB7d2lkdGg6IDE2MHB4OyBtYXJnaW4tdG9wOiAyOHB4OyBib3JkZXItcmFkaXVzOiA4cHg7fQ0KLmltcG93ZXJCb3ggLnRpdGxlIHtmb250LXdlaWdodDogNjAwO30NCi5pbXBvd2VyQm94IC5pbmZvIHt3aWR0aDogMjAwcHg7IG1hcmdpbi10b3A6IDI2cHh9DQouc3RhdHVzX2ljb24ge2Rpc3BsYXk6IG5vbmV9DQouaW1wb3dlckJveCAuc3RhdHVzIHt0ZXh0LWFsaWduOiBjZW50ZXI7IHBhZGRpbmc6IDA7fQ==" />
       <Form
         name="normal_login"
         className="login-form"

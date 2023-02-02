@@ -22,6 +22,7 @@ import Settings from "./pages/Settings";
 
 // With the Tauri API npm package:
 import { invoke } from "@tauri-apps/api/tauri";
+import WechatLoginCallback from "./pages/wechat/WechatLoginCallback";
 
 document.addEventListener("DOMContentLoaded", () => {
   // This will wait for the window to load, but you could
@@ -52,7 +53,9 @@ export const router = createBrowserRouter(
         <Route index element={<Flow />} />
         <Route path="/settings" element={<Settings />} />
       </Route>
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<Login />} ></Route>
+      <Route path="/login/wechat" element={<WechatLoginCallback />} />
+
     </Route>
   )
 );

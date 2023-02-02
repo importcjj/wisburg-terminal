@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../data/restful/auth";
+import { auth, getProfile } from "../data/restful/auth";
 import { useLocalStorage } from "./useLocalStorage";
 
 const AuthContext = createContext();
@@ -23,6 +23,16 @@ export const AuthProvider = ({ children, userData }) => {
     }, 1000);
   };
 
+  const authByToken = async (t) => {
+    setToken(t);
+    let user = await getProfile();  
+    setUser(user)
+
+    setTimeout(() => {
+      navigate("/", { replace: true });
+    }, 1000);
+  }
+
   const logout = () => {
     setUser(null);
     setToken(null);
@@ -34,6 +44,7 @@ export const AuthProvider = ({ children, userData }) => {
       user,
       login,
       logout,
+      authByToken,
       token,
     }),
     [user]
@@ -45,3 +56,5 @@ export const AuthProvider = ({ children, userData }) => {
 export const useAuth = () => {
   return useContext(AuthContext);
 };
+
+
