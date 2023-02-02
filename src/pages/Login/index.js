@@ -5,6 +5,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { listen } from "@tauri-apps/api/event";
 import { useNavigate } from "react-router-dom";
 import { WebviewWindow } from "@tauri-apps/api/window";
+import { open } from '@tauri-apps/api/shell';
 
 import "./index.css";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
@@ -35,10 +36,12 @@ const Login = () => {
   }, [])
 
   const openWechatLogin = () => {
-    const mainWindow = WebviewWindow.getByLabel('main')
-    mainWindow.hide();
-    const wechatWindow = new WebviewWindow('wechat', { url: WECHAT_QRCODE, title: "微信扫码登录" });
-    wechatWindow.once('tauri://destroyed', () => {mainWindow.show()});
+    open(WECHAT_QRCODE);
+
+    // const mainWindow = WebviewWindow.getByLabel('main')
+    // mainWindow.hide();
+    // const wechatWindow = new WebviewWindow('wechat', { url: WECHAT_QRCODE, title: "微信扫码登录" });
+    // wechatWindow.once('tauri://destroyed', () => {mainWindow.show()});
   }
 
   const onFinish = (values) => {
