@@ -1,7 +1,6 @@
 import "./App.css";
 import { FloatButton, Layout, Menu, Button, ConfigProvider, theme } from "antd";
 import { UnorderedListOutlined, SettingOutlined } from "@ant-design/icons";
-import WithData from "./helpers/with-data";
 import zhCN from "antd/locale/zh_CN";
 
 import { useState } from "react";
@@ -53,7 +52,8 @@ function App() {
         algorithm: theme.darkAlgorithm,
       }}
     >
-      <WithData>
+        
+
         <Layout hasSider>
           <Sider
             collapsed
@@ -68,6 +68,7 @@ function App() {
               bottom: 0,
             }}
           >
+
             <Menu
               defaultSelectedKeys={["flow"]}
               items={items}
@@ -94,7 +95,6 @@ function App() {
             <Footer className="footer"></Footer>
           </Layout>
         </Layout>
-      </WithData>
     </ConfigProvider>
   );
 }

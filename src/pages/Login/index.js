@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { WebviewWindow } from "@tauri-apps/api/window";
 import { open } from '@tauri-apps/api/shell';
 
+import logo from "./logo.png";
 import "./index.css";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 
@@ -20,15 +21,21 @@ const Login = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    const unlisten = listen("wechat-login", (event) => {
+    const unlisten = listen("web-authorized", (event) => {
       const { token } = event.payload;
       authByToken(token).then(user => {
-        console.log(user)
         setTimeout(() => {
           navigate("/", { replace: true });
-          const wechatWindow = WebviewWindow.getByLabel('wechat');
-          wechatWindow.close();
+          const mainWindow = WebviewWindow.getByLabel('main');
+          mainWindow.setFocus()
         }, 1000);
+      })
+      .catch((e) => {
+        setLoading(false);
+        messageApi.open({
+          type: "error",
+          content: `登录失败: ${e}`,
+        });
       })
     })
 
@@ -37,11 +44,6 @@ const Login = () => {
 
   const openWechatLogin = () => {
     open(WECHAT_QRCODE);
-
-    // const mainWindow = WebviewWindow.getByLabel('main')
-    // mainWindow.hide();
-    // const wechatWindow = new WebviewWindow('wechat', { url: WECHAT_QRCODE, title: "微信扫码登录" });
-    // wechatWindow.once('tauri://destroyed', () => {mainWindow.show()});
   }
 
   const onFinish = (values) => {
@@ -64,12 +66,12 @@ const Login = () => {
           content: `登录失败: ${e}`,
         });
       })
-      .finally(() => { });
   };
   return (
     <div className="login-box">
       {window.location.toString()}
       {contextHolder}
+      <img style={{marginBottom: 20}} width={80} src={logo} className="App-logo" alt="logo" />
       {/* <iframe id="wechat-qrcode" allowtransparency="true" scrolling="no" frameBorder={0} height={300} width={200} style={{ overflow: "hidden" }} src="https://open.weixin.qq.com/connect/qrconnect?appid=wxe7d39940a780faf7&redirect_uri=https%3A%2F%2Fwww.wisburg.com%2Fwechat.html%3Fredirect_to%3Dhttps%3A%2F%2Fwww.wisburg.com%2F?action=terminal-login&response_type=code&scope=snsapi_login&state=wx_login&style=white&href=data:text/css;base64,LmltcG93ZXJCb3ggLnFyY29kZSB7d2lkdGg6IDE2MHB4OyBtYXJnaW4tdG9wOiAyOHB4OyBib3JkZXItcmFkaXVzOiA4cHg7fQ0KLmltcG93ZXJCb3ggLnRpdGxlIHtmb250LXdlaWdodDogNjAwO30NCi5pbXBvd2VyQm94IC5pbmZvIHt3aWR0aDogMjAwcHg7IG1hcmdpbi10b3A6IDI2cHh9DQouc3RhdHVzX2ljb24ge2Rpc3BsYXk6IG5vbmV9DQouaW1wb3dlckJveCAuc3RhdHVzIHt0ZXh0LWFsaWduOiBjZW50ZXI7IHBhZGRpbmc6IDA7fQ==" /> */}
       <Form
         name="normal_login"

@@ -11,12 +11,15 @@ let fetch = axios.create({
 
 fetch.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("x-token");
-    if (token) {
-      const t = JSON.parse(token);
-      config.headers["x-hufu-token"] = t;
-    } else {
-      config.headers["x-hufu-token"] = "";
+
+    if (!config.headers["x-hufu-token"]) {
+      const token = localStorage.getItem("x-token");
+      if (token) {
+        const t = JSON.parse(token);
+        config.headers["x-hufu-token"] = t;
+      } else {
+        config.headers["x-hufu-token"] = "";
+      }
     }
 
     return config;

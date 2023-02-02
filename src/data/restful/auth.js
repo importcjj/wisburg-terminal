@@ -1,9 +1,13 @@
+import { Token } from "graphql";
 import fetch from "./fetch";
 
-export const getProfile = () => {
+export const getProfile = (token) => {
   return fetch({
-    url: "/user/self",
+    url: "/institution/user/self",
     method: "get",
+    headers: {
+      "x-hufu-token": token,
+    }
   });
 };
 

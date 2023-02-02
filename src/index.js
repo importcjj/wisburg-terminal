@@ -19,6 +19,7 @@ import "antd/dist/reset.css";
 import "./index.css";
 import { getProfile } from "./data/restful/auth";
 import Settings from "./pages/Settings";
+import WithData from "./helpers/with-data";
 
 // With the Tauri API npm package:
 import { invoke } from "@tauri-apps/api/tauri";
@@ -63,7 +64,7 @@ export const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
-  <RouterProvider router={router} />
+  <WithData><RouterProvider router={router} /></WithData>
   // </React.StrictMode>
 );
 

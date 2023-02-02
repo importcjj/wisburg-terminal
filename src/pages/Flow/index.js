@@ -17,6 +17,7 @@ import {
   DatePicker,
   Pagination,
   Affix,
+  Tooltip,
 } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import TimeAgo from "timeago-react";
@@ -53,7 +54,7 @@ export default () => {
   const [data, setData] = useState([]);
   const [titleInput, setTitleInput] = useState();
   const [startTime, setStartTime] = useState("");
-  const [kinds, setKinds] = useState([]);
+  const [kinds, setKinds] = useState([9]);
   const [endTime, setEndTime] = useState("");
   const searchInput = useRef(null);
   const [pagination, setPagination] = useState({
@@ -121,7 +122,7 @@ export default () => {
     if (filters?.kind) {
       setKinds(filters?.kind[0]);
     } else {
-      setKinds(null);
+      setKinds(kinds);
     }
   };
 
@@ -231,9 +232,9 @@ export default () => {
       ),
       width: 80,
       filters: [
-        { text: "链接", value: [1, 2] },
+        // { text: "链接", value: [1, 2] },
         { text: "报告", value: [9] },
-        { text: "视频", value: [3] },
+        // { text: "视频", value: [3] },
       ],
 
       render: (_, item) => {

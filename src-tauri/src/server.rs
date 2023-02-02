@@ -10,7 +10,7 @@ struct WebchatLoginData {
     token: String,
 }
 
-#[post("/wechat/login")]
+#[post("/web/authorized")]
 async fn wechat_login(
     state: web::Data<State>,
     data: web::Json<WebchatLoginData>,
@@ -18,7 +18,7 @@ async fn wechat_login(
     let data: WebchatLoginData = data.into_inner();
     let main_window = state.tauri.get_window("main").unwrap();
 
-    main_window.emit("wechat-login", data).unwrap();
+    main_window.emit("web-authorized", data).unwrap();
 
     Ok(HttpResponse::NoContent().finish())
 }
