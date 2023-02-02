@@ -28,9 +28,7 @@ export const AuthProvider = ({ children, userData }) => {
     let user = await getProfile();  
     setUser(user)
 
-    setTimeout(() => {
-      navigate("/", { replace: true });
-    }, 1000);
+    return user
   }
 
   const logout = () => {
