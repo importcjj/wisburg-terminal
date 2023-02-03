@@ -11,7 +11,6 @@ let fetch = axios.create({
 
 fetch.interceptors.request.use(
   (config) => {
-
     if (!config.headers["x-hufu-token"]) {
       const token = localStorage.getItem("x-token");
       if (token) {

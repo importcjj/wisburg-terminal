@@ -52,49 +52,46 @@ function App() {
         algorithm: theme.darkAlgorithm,
       }}
     >
-        
-
-        <Layout hasSider>
-          <Sider
-            collapsed
+      <Layout hasSider>
+        <Sider
+          collapsed
+          style={{
+            backgroundColor: "#141414",
+            zIndex: 2,
+            overflow: "auto",
+            height: "100vh",
+            position: "fixed",
+            left: 0,
+            top: 0,
+            bottom: 0,
+          }}
+        >
+          <Menu
+            defaultSelectedKeys={["flow"]}
+            items={items}
+            onClick={handleMenuClick}
+          />
+          <div
             style={{
-              backgroundColor: "#141414",
-              zIndex: 2,
-              overflow: "auto",
-              height: "100vh",
               position: "fixed",
-              left: 0,
-              top: 0,
-              bottom: 0,
+              bottom: 10,
+              textAlign: "center",
+              width: 80,
             }}
           >
-
-            <Menu
-              defaultSelectedKeys={["flow"]}
-              items={items}
-              onClick={handleMenuClick}
-            />
-            <div
-              style={{
-                position: "fixed",
-                bottom: 10,
-                textAlign: "center",
-                width: 80,
-              }}
-            >
-              <Button type="text" onClick={logout}>
-                登出
-              </Button>
-            </div>
-          </Sider>
-          <Layout style={{ marginLeft: 80 }}>
-            <Content>
-              <Outlet />
-              <FloatButton.BackTop />
-            </Content>
-            <Footer className="footer"></Footer>
-          </Layout>
+            <Button type="text" onClick={logout}>
+              登出
+            </Button>
+          </div>
+        </Sider>
+        <Layout style={{ marginLeft: 80 }}>
+          <Content>
+            <Outlet />
+            <FloatButton.BackTop />
+          </Content>
+          <Footer className="footer"></Footer>
         </Layout>
+      </Layout>
     </ConfigProvider>
   );
 }

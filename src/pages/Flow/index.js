@@ -5,26 +5,14 @@ import {
   LinkOutlined,
   PlayCircleOutlined,
   SearchOutlined,
-  ShareAltOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons";
-import { useLazyQuery, useQuery } from "@apollo/client";
-import {
-  Button,
-  Input,
-  Space,
-  Table,
-  DatePicker,
-  Pagination,
-  Affix,
-  Tooltip,
-} from "antd";
-import React, { useEffect, useRef, useState } from "react";
+import { useQuery } from "@apollo/client";
+import { Button, Input, Space, Table, DatePicker, Pagination } from "antd";
+import React, { useRef, useState } from "react";
 import TimeAgo from "timeago-react";
 import { CONTENTS_QUERY } from "../../data/query/content";
 import dayjs from "dayjs";
 import { downloadFile } from "../../utils/fs";
-import { registerAll } from "@tauri-apps/api/globalShortcut";
 
 import "./index.css";
 import moment from "moment";
@@ -54,7 +42,7 @@ export default () => {
   const [data, setData] = useState([]);
   const [titleInput, setTitleInput] = useState();
   const [startTime, setStartTime] = useState("");
-  const [kinds, setKinds] = useState([9]);
+  const [kinds, setKinds] = useState([]);
   const [endTime, setEndTime] = useState("");
   const searchInput = useRef(null);
   const [pagination, setPagination] = useState({
@@ -63,6 +51,29 @@ export default () => {
     pageSizeOptions: [25, 50, 100],
     total: 0,
   });
+  const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
+
+  const triggerFilterDropdownOpen = () => {
+    setFilterDropdownOpen(!filterDropdownOpen);
+  };
+
+  const handleKeyPress = (event) => {
+    switch (event.key) {
+      case "f":
+        triggerFilterDropdownOpen();
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  React.useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [filterDropdownOpen]);
 
   const { loading, refetch } = useQuery(CONTENTS_QUERY, {
     variables: {
@@ -119,6 +130,7 @@ export default () => {
   };
 
   const handleTableChange = (pagination, filters, sorter) => {
+    setPagination({ ...pagination, current: 1 });
     if (filters?.kind) {
       setKinds(filters?.kind[0]);
     } else {
@@ -190,14 +202,7 @@ export default () => {
             />
             <Space>
               <Button
-                size="small"
-                type="primary"
-                onClick={() => handleSearch(selectedKeys, confirm, 0)}
-                icon={<SearchOutlined />}
-              >
-                搜索
-              </Button>
-              <Button
+                type="link"
                 size="small"
                 onClick={() =>
                   clearFilters &&
@@ -205,6 +210,14 @@ export default () => {
                 }
               >
                 重置
+              </Button>
+              <Button
+                size="small"
+                type="primary"
+                onClick={() => handleSearch(selectedKeys, confirm, 0)}
+                icon={<SearchOutlined />}
+              >
+                搜索
               </Button>
             </Space>
           </div>
@@ -216,9 +229,11 @@ export default () => {
         }
       },
       filterIcon: (
-        <Space>
-          <SearchOutlined /> 搜索
-        </Space>
+        <div style={{ width: "100%", height: "100%" }}>
+          <Space>
+            <SearchOutlined /> {titleInput ? "取消搜索" : "搜索"}
+          </Space>
+        </div>
       ),
     },
     {
@@ -232,9 +247,9 @@ export default () => {
       ),
       width: 80,
       filters: [
-        // { text: "链接", value: [1, 2] },
+        { text: "链接", value: [1, 2] },
         { text: "报告", value: [9] },
-        // { text: "视频", value: [3] },
+        { text: "视频", value: [3] },
       ],
 
       render: (_, item) => {
@@ -282,14 +297,8 @@ export default () => {
             </div>
             <Space>
               <Button
-                size="small"
-                type="primary"
-                onClick={() => handleSearch(selectedKeys, confirm, 2)}
-                icon={<SearchOutlined />}
-              >
-                搜索
-              </Button>
-              <Button
+                type="link"
+                disabled={!startTime && !endTime}
                 size="small"
                 onClick={() =>
                   clearFilters &&
@@ -297,6 +306,14 @@ export default () => {
                 }
               >
                 重置
+              </Button>
+              <Button
+                size="small"
+                type="primary"
+                onClick={() => handleSearch(selectedKeys, confirm, 2)}
+                icon={<SearchOutlined />}
+              >
+                搜索
               </Button>
             </Space>
           </div>
@@ -326,9 +343,9 @@ export default () => {
         rowKey={(record) => record.raw_id}
         loading={loading}
         size="small"
-        sticky
         pagination={false}
         onChange={handleTableChange}
+        scroll={{ scrollToFirstRowOnChange: true }}
       />
 
       <div className="flow-tool-bar">

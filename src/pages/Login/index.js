@@ -5,13 +5,14 @@ import { useAuth } from "../../hooks/useAuth";
 import { listen } from "@tauri-apps/api/event";
 import { useNavigate } from "react-router-dom";
 import { WebviewWindow } from "@tauri-apps/api/window";
-import { open } from '@tauri-apps/api/shell';
+import { open } from "@tauri-apps/api/shell";
 
 import logo from "./logo.png";
 import "./index.css";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 
-const WECHAT_QRCODE = "https://open.weixin.qq.com/connect/qrconnect?appid=wxe7d39940a780faf7&redirect_uri=http%3A%2F%2Fwww.wisburg.com%2Fwechat.html%3Fredirect_to%3Dhttp%3A%2F%2Fwww.wisburg.com%2F?action=terminal-login&response_type=code&scope=snsapi_login&state=wx_login&style=white&href=data:text/css;base64,LmltcG93ZXJCb3ggLnFyY29kZSB7d2lkdGg6IDE2MHB4OyBtYXJnaW4tdG9wOiAyOHB4OyBib3JkZXItcmFkaXVzOiA4cHg7fQ0KLmltcG93ZXJCb3ggLnRpdGxlIHtmb250LXdlaWdodDogNjAwO30NCi5pbXBvd2VyQm94IC5pbmZvIHt3aWR0aDogMjAwcHg7IG1hcmdpbi10b3A6IDI2cHh9DQouc3RhdHVzX2ljb24ge2Rpc3BsYXk6IG5vbmV9DQouaW1wb3dlckJveCAuc3RhdHVzIHt0ZXh0LWFsaWduOiBjZW50ZXI7IHBhZGRpbmc6IDA7fQ=="
+const WECHAT_QRCODE =
+  "https://open.weixin.qq.com/connect/qrconnect?appid=wxe7d39940a780faf7&redirect_uri=http%3A%2F%2Fwww.wisburg.com%2Fwechat.html%3Fredirect_to%3Dhttp%3A%2F%2Fwww.wisburg.com%2F?action=terminal-login&response_type=code&scope=snsapi_login&state=wx_login&style=white&href=data:text/css;base64,LmltcG93ZXJCb3ggLnFyY29kZSB7d2lkdGg6IDE2MHB4OyBtYXJnaW4tdG9wOiAyOHB4OyBib3JkZXItcmFkaXVzOiA4cHg7fQ0KLmltcG93ZXJCb3ggLnRpdGxlIHtmb250LXdlaWdodDogNjAwO30NCi5pbXBvd2VyQm94IC5pbmZvIHt3aWR0aDogMjAwcHg7IG1hcmdpbi10b3A6IDI2cHh9DQouc3RhdHVzX2ljb24ge2Rpc3BsYXk6IG5vbmV9DQouaW1wb3dlckJveCAuc3RhdHVzIHt0ZXh0LWFsaWduOiBjZW50ZXI7IHBhZGRpbmc6IDA7fQ==";
 
 const Login = () => {
   const [account, setAccount] = useLocalStorage("account", {});
@@ -23,28 +24,31 @@ const Login = () => {
   React.useEffect(() => {
     const unlisten = listen("web-authorized", (event) => {
       const { token } = event.payload;
-      authByToken(token).then(user => {
-        setTimeout(() => {
-          navigate("/", { replace: true });
-          const mainWindow = WebviewWindow.getByLabel('main');
-          mainWindow.setFocus()
-        }, 1000);
-      })
-      .catch((e) => {
-        setLoading(false);
-        messageApi.open({
-          type: "error",
-          content: `登录失败: ${e}`,
+      authByToken(token)
+        .then((user) => {
+          setTimeout(() => {
+            navigate("/", { replace: true });
+            const mainWindow = WebviewWindow.getByLabel("main");
+            mainWindow.setFocus();
+          }, 1000);
+        })
+        .catch((e) => {
+          setLoading(false);
+          messageApi.open({
+            type: "error",
+            content: `登录失败: ${e}`,
+          });
         });
-      })
-    })
+    });
 
-    return () => {unlisten.then(f => f())}
-  }, [])
+    return () => {
+      unlisten.then((f) => f());
+    };
+  }, []);
 
   const openWechatLogin = () => {
     open(WECHAT_QRCODE);
-  }
+  };
 
   const onFinish = (values) => {
     setLoading(true);
@@ -65,13 +69,19 @@ const Login = () => {
           type: "error",
           content: `登录失败: ${e}`,
         });
-      })
+      });
   };
   return (
     <div className="login-box">
       {window.location.toString()}
       {contextHolder}
-      <img style={{marginBottom: 20}} width={80} src={logo} className="App-logo" alt="logo" />
+      <img
+        style={{ marginBottom: 20 }}
+        width={80}
+        src={logo}
+        className="App-logo"
+        alt="logo"
+      />
       {/* <iframe id="wechat-qrcode" allowtransparency="true" scrolling="no" frameBorder={0} height={300} width={200} style={{ overflow: "hidden" }} src="https://open.weixin.qq.com/connect/qrconnect?appid=wxe7d39940a780faf7&redirect_uri=https%3A%2F%2Fwww.wisburg.com%2Fwechat.html%3Fredirect_to%3Dhttps%3A%2F%2Fwww.wisburg.com%2F?action=terminal-login&response_type=code&scope=snsapi_login&state=wx_login&style=white&href=data:text/css;base64,LmltcG93ZXJCb3ggLnFyY29kZSB7d2lkdGg6IDE2MHB4OyBtYXJnaW4tdG9wOiAyOHB4OyBib3JkZXItcmFkaXVzOiA4cHg7fQ0KLmltcG93ZXJCb3ggLnRpdGxlIHtmb250LXdlaWdodDogNjAwO30NCi5pbXBvd2VyQm94IC5pbmZvIHt3aWR0aDogMjAwcHg7IG1hcmdpbi10b3A6IDI2cHh9DQouc3RhdHVzX2ljb24ge2Rpc3BsYXk6IG5vbmV9DQouaW1wb3dlckJveCAuc3RhdHVzIHt0ZXh0LWFsaWduOiBjZW50ZXI7IHBhZGRpbmc6IDA7fQ==" /> */}
       <Form
         name="normal_login"
@@ -113,7 +123,8 @@ const Login = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button style={{width:'100%'}}
+          <Button
+            style={{ width: "100%" }}
             type="primary"
             htmlType="submit"
             className="login-form-button"
@@ -128,13 +139,14 @@ const Login = () => {
             <Checkbox style={{ color: "#fff" }}>记住我</Checkbox>
           </Form.Item>
         </Form.Item>
-
-
       </Form>
 
       <div className="login-methods">
         <a>第三方登录：</a>
-        <WechatOutlined onClick={openWechatLogin} style={{color: "rgb(102,220, 120)"}}/>
+        <WechatOutlined
+          onClick={openWechatLogin}
+          style={{ color: "rgb(102,220, 120)" }}
+        />
       </div>
     </div>
   );

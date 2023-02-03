@@ -1,6 +1,5 @@
-
 :root {
-  --flow-table-border-color: rgba(255, 255, 255, 0.29)
+  --flow-table-border-color: rgba(255, 255, 255, 0.29);
 }
 
 .flow-box {
@@ -24,7 +23,6 @@ th.ant-table-cell {
   border-inline-end: none !important;
   cursor: pointer;
   font-size: 16px;
-
 }
 
 .ant-table-tbody > tr > td.flow-cell-title a {

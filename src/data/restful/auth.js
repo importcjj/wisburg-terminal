@@ -7,7 +7,7 @@ export const getProfile = (token) => {
     method: "get",
     headers: {
       "x-hufu-token": token,
-    }
+    },
   });
 };
 

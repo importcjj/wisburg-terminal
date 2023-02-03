@@ -8,7 +8,6 @@
   flex-direction: column;
 }
 
-
 #wechat-qrcode {
   margin-right: 100px;
 }
@@ -30,5 +29,5 @@
 }
 
 .login-methods span {
-    font-size: 25px;
+  font-size: 25px;
 }

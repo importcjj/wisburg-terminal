@@ -13,30 +13,28 @@ export const AuthProvider = ({ children, userData }) => {
   const [token, setToken] = useLocalStorage("x-token", userData);
   const navigate = useNavigate();
 
-
   const setAuthorized = async (token, user) => {
-    let data = await getProfile(token)
+    let data = await getProfile(token);
 
     const privileges = data.privileges || [];
-    const i = privileges.findIndex(p => {
-      if (p.name === "研报权限") { 
+    const i = privileges.findIndex((p) => {
+      if (p.name === "研报权限") {
         const now = moment();
-        const expiredAt = moment(p.expired_at)
-        return expiredAt.isAfter(now)
-       }
+        const expiredAt = moment(p.expired_at);
+        return expiredAt.isAfter(now);
+      }
     });
 
     if (i === -1) {
-      throw new Error("未开通机构权限")
+      throw new Error("未开通机构权限");
     }
     setToken(token);
     setUser(user);
-
-  }
+  };
   const clearAuthorized = () => {
     setUser(null);
     setToken(null);
-  }
+  };
 
   const login = async ({ password, phone_number }) => {
     let { token, user } = await auth({
@@ -45,19 +43,18 @@ export const AuthProvider = ({ children, userData }) => {
       country_code: 86,
     });
 
-    await setAuthorized(token, user)
+    await setAuthorized(token, user);
     setTimeout(() => {
       navigate("/", { replace: true });
     }, 1000);
   };
 
   const authByToken = async (token) => {
-
     let user = await getProfile(token);
-    await setAuthorized(token, user)
+    await setAuthorized(token, user);
 
-    return user
-  }
+    return user;
+  };
 
   const logout = () => {
     clearAuthorized();
@@ -81,5 +78,3 @@ export const AuthProvider = ({ children, userData }) => {
 export const useAuth = () => {
   return useContext(AuthContext);
 };
-
-

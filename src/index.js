@@ -54,9 +54,8 @@ export const router = createBrowserRouter(
         <Route index element={<Flow />} />
         <Route path="/settings" element={<Settings />} />
       </Route>
-      <Route path="/login" element={<Login />} ></Route>
+      <Route path="/login" element={<Login />}></Route>
       <Route path="/login/wechat" element={<WechatLoginCallback />} />
-
     </Route>
   )
 );
@@ -64,7 +63,9 @@ export const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
-  <WithData><RouterProvider router={router} /></WithData>
+  <WithData>
+    <RouterProvider router={router} />
+  </WithData>
   // </React.StrictMode>
 );
 
