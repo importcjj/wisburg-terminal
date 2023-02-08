@@ -73,7 +73,6 @@ const Login = () => {
   };
   return (
     <div className="login-box">
-      {window.location.toString()}
       {contextHolder}
       <img
         style={{ marginBottom: 20 }}
