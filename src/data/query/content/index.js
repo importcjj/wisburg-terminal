@@ -1,5 +1,7 @@
 import { gql } from "@apollo/client";
 
+const MATIX_GROUP = 13; //matrix专用
+
 export const CONTENTS_QUERY = gql`
   query GetContnets(
     $first: Int = 20
@@ -10,6 +12,8 @@ export const CONTENTS_QUERY = gql`
     $startTime: Timestamp
     $endTime: Timestamp
     $kinds: [Int]
+    $group: Int = ${MATIX_GROUP}
+    $tag_id: Int = 0,
   ) {
     contents(
       first: $first
@@ -20,6 +24,8 @@ export const CONTENTS_QUERY = gql`
       start_time: $startTime
       end_time: $endTime
       kinds: $kinds
+      group: $group
+      tag_id: $tag_id,
     ) {
       total_count
       items {

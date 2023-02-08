@@ -24,14 +24,15 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 });
 
 const unauthorizedV2 = onError(({ networkError }) => {
-  // if (networkError?.statusCode === 401) SSOLogin();
+  if (networkError?.statusCode === 401) window.location = "/login";
+  if (networkError?.statusCode === 403) window.location = "/login";
 });
 
 /* This is the Apollo Client. It is the main tool that we use to interact with the GraphQL API. */
 export const client = new ApolloClient({
   link: ApolloLink.split(
     (operation) => operation.getContext().clientName === "old_api",
-    old,
+    unauthorizedV2.concat(old),
     unauthorizedV2.concat(authMiddleware).concat(v2)
   ),
   // link: unauthorizedV2.concat(authMiddleware).concat(v2),

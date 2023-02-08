@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const getUri = () => {
-  return "https://api-prod.wisburg.com/v1";
+  return process.env.REACT_APP_API_BASE_URL + "/v1";
 };
 
 let fetch = axios.create({
