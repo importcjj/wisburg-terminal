@@ -72,7 +72,8 @@
         "width": 1000,
         "minWidth": 800,
         "theme": "Dark",
-        "visible": false
+        "visible": false,
+        "transparent": true
       },
       {
         "width": 400,
@@ -80,7 +81,9 @@
         "center": true,
         "decorations": false,
         "url": "splashscreen.html",
-        "label": "splashscreen"
+        "label": "splashscreen",
+        "resizable": false
+        
       }
     ]
   }

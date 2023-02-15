@@ -16,6 +16,7 @@ import { downloadFile } from "../../utils/fs";
 
 import "./index.css";
 import moment from "moment";
+import { useAuth } from "../../hooks/useAuth";
 
 const { RangePicker } = DatePicker;
 
@@ -45,6 +46,7 @@ export default () => {
   const [kinds, setKinds] = useState([1, 2, 9, 3]);
   const [endTime, setEndTime] = useState("");
   const searchInput = useRef(null);
+  const { token } = useAuth();
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 25,
@@ -175,7 +177,9 @@ export default () => {
         return (
           <a
             target="_blank"
-            href={`https://wisburg.com/${kind}/${record.raw_id}`}
+            href={`${process.env.REACT_APP_WEBSITE}/${kind}/${
+              record.raw_id
+            }?token=${encodeURI(token)}`}
           >
             {title}
           </a>
