@@ -179,7 +179,7 @@ export default () => {
             target="_blank"
             href={`${process.env.REACT_APP_WEBSITE}/${kind}/${
               record.raw_id
-            }?token=${encodeURI(token)}`}
+            }?token=${encodeURIComponent(token)}`}
           >
             {title}
           </a>
