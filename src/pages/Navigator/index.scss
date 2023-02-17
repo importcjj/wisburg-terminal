@@ -1,0 +1,506 @@
+$wisburgColor: #1b79ed;
+
+@mixin textLine($line) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+img[src=""],
+img:not([src]) {
+  opacity: 0;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+.container {
+  min-height: 100vh;
+
+  .container-header {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+
+    // background-color: #272633;
+    // padding: 0 120px;
+    .header-container {
+      .header-content {
+        // margin-left: 190px;
+        padding-top: 58px;
+        padding-bottom: 35px;
+        width: 705px;
+        position: relative;
+        z-index: 22;
+        margin: 0 auto;
+
+        .search-input {
+          //   width: 100%;
+          //   min-width: 100px;
+          //   margin: 0 auto;
+          //   position: relative;
+
+          input {
+            @media screen and (max-width: 760px) {
+              width: 100%;
+              padding: 0 45px 0 15px;
+              box-sizing: border-box;
+              height: 42px;
+            }
+
+            @media screen and (min-width: 761px) {
+              width: 658px;
+              padding: 0 0 0 15px;
+            }
+
+            box-sizing: border-box;
+            height: 40px;
+            color: #333;
+            border: solid 1px #f0f0f5;
+            background-color: #f5f5fa;
+            font-size: 14px;
+          }
+
+          input:focus {
+            background-color: #ebebf0;
+          }
+
+          input:active {
+            background-color: #ebebf0;
+          }
+
+          i {
+            // background: #272633 url("../../src/assets/img/searchIcon.png") center center no-repeat;
+            background-size: 24px;
+            width: 24px;
+            height: 24px;
+            padding: 8px 12px;
+            cursor: pointer;
+            position: absolute;
+
+            @media screen and (max-width: 760px) {
+              position: absolute;
+              top: 0;
+              right: 0;
+            }
+          }
+
+          i:hover {
+            background-color: #3f3e52;
+          }
+        }
+
+        .search-menu {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          margin-top: 14px;
+
+          .search-menu-item {
+            cursor: pointer;
+            font-size: 14px;
+            color: #999;
+            margin-right: 46px;
+          }
+
+          .active {
+            color: $wisburgColor;
+          }
+
+          .search-menu-item:hover {
+            color: $wisburgColor;
+          }
+
+          .search-menu-item:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .container-content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: relative;
+
+    // min-height: 100vh;
+    .right-container {
+      width: calc(100% - 222px);
+      padding: 0 44px 32px 42px;
+      box-sizing: border-box;
+      margin-left: 222px;
+
+      .custom {
+        .custom-header {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+
+          .custom-header-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333333;
+            line-height: 20px;
+
+            i {
+              font-size: 15;
+              vertical-align: middle;
+              margin-right: 10px;
+            }
+          }
+
+          .custom-btn {
+            cursor: pointer;
+            background: $wisburgColor;
+            border-radius: 4px;
+            padding: 7px 10px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #ffffff;
+          }
+
+          .custom-btn:hover {
+            background: #c49573;
+          }
+        }
+
+        .custom-menu-container {
+          padding-top: 13px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-start;
+          flex-wrap: wrap;
+
+          .custom-menu-item {
+            position: relative;
+            // border: 1px solid transparent;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            margin-right: 20px;
+            margin-bottom: 14px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            padding: 14px 18px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333333;
+            line-height: 18px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            .wisburg-ic-more-vert {
+              // transition: all .3s ease-in-out;
+              // position: absolute;
+              // right: -7px;
+              // top: -7px;
+              // width: 14px;
+              margin-left: 14px;
+              font-size: 1px;
+              color: #c0c0c0;
+              opacity: 0;
+              visibility: hidden;
+            }
+
+            .more {
+              width: 0;
+              transition: all 0.3s ease-in-out;
+
+              .wisburg-ic-more-vert {
+                transition: all 0.3s ease-in-out;
+              }
+            }
+
+            .more:hover {
+              .wisburg-ic-more-vert {
+                color: #787878;
+              }
+            }
+
+            .popover_container {
+              position: absolute;
+              top: 50px;
+              right: -4px;
+              transition: all 0.3s ease-in-out;
+              visibility: hidden;
+              opacity: 0;
+              z-index: 1;
+              background: #fff;
+              color: #181818;
+              box-shadow: 0px 0px 10px 0px rgba(39, 38, 51, 0.15);
+              font-size: 12px;
+              line-height: 17px;
+              padding: 14px;
+              border-radius: 4px;
+              box-sizing: border-box;
+
+              .popover_item {
+                word-break: keep-all;
+                margin-bottom: 18px;
+                text-align: left;
+              }
+
+              .popover_item:last-child {
+                margin-bottom: 0;
+              }
+
+              .popover_item:hover {
+                color: $wisburgColor;
+              }
+            }
+
+            .popover_container::after {
+              position: absolute;
+              right: 19px;
+              // margin-left: -9px;
+              top: -8px;
+              content: "";
+              width: 17px;
+              height: 17px;
+              transform: rotate(-45deg);
+              background: #fff;
+              background-size: 17px 17px;
+              border-top-right-radius: 4px;
+            }
+
+            .more:hover .popover_container {
+              visibility: visible;
+              opacity: 1;
+            }
+          }
+
+          .custom-menu-item:hover {
+            color: $wisburgColor;
+            padding-right: 14px;
+            box-shadow: 0px 0px 10px 0px rgba(39, 38, 51, 0.15);
+
+            .more {
+              width: 28px;
+            }
+
+            .wisburg-ic-more-vert {
+              font-size: 14px;
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+
+          .custom-menu-item:last-child {
+            margin-right: 0;
+          }
+
+          .add-btn {
+            box-sizing: border-box;
+            border: 1px dashed #d8d8d8;
+            min-width: 168px;
+            padding: 13px 16px;
+            box-sizing: border-box;
+
+            span {
+              margin-right: 8px;
+              color: #d8d8d8;
+              font-size: 14px;
+            }
+
+            .el-icon-plus {
+              font-weight: bold;
+              font-size: 16px;
+              color: #d8d8d8;
+            }
+          }
+
+          .add-btn:hover {
+            box-shadow: none;
+            border-color: $wisburgColor;
+          }
+        }
+
+        .login-btn {
+          cursor: pointer;
+          box-sizing: border-box;
+          border: 1px dashed #d8d8d8;
+          width: 236px;
+          padding: 12px 0;
+          font-size: 14px;
+          margin-top: 18px;
+          color: #d8d8d8;
+
+          span {
+            margin-right: 8px;
+          }
+
+          .el-icon-plus {
+            font-weight: bold;
+            font-size: 16px;
+            color: #d8d8d8;
+          }
+        }
+
+        .login-btn:hover {
+          box-shadow: none;
+          border-color: $wisburgColor;
+        }
+      }
+
+      .website {
+        text-align: left;
+
+        .website-category {
+          margin-top: 18px;
+          font-size: 14px;
+          font-weight: 500;
+          color: #ccc;
+          line-height: 20px;
+
+          i {
+            font-size: 14px;
+            margin-right: 10px;
+          }
+        }
+
+        .website-sub-category {
+          margin-top: 18px;
+          font-size: 14px;
+          font-weight: 500;
+          color: #ccc;
+          line-height: 20px;
+          margin-left: 16px;
+
+          img {
+            width: 7px;
+            height: 11px;
+            object-fit: contain;
+            margin-right: 12px;
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+
+        .website-container {
+          margin-top: 20px;
+          padding-bottom: 14px;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-gap: 18px 20px;
+
+          .website-item {
+            cursor: pointer;
+            position: relative;
+            border-radius: 4px;
+            padding: 14px;
+            padding-right: 18px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: flex-start;
+            width: 160px;
+
+            .left {
+              width: 42px;
+              height: 42px;
+              background: #333;
+              border-radius: 4px;
+              margin-right: 12px;
+              flex-shrink: 0;
+
+              img {
+                width: 42px;
+                height: 42px;
+                object-fit: cover;
+                border-radius: 4px;
+              }
+            }
+
+            .right {
+              .website-title {
+                font-size: 14px;
+                font-weight: 500;
+                color: #ccc;
+                line-height: 18px;
+              }
+
+              .website-desc {
+                margin-top: 4px;
+                @include textLine(2);
+                font-size: 12px;
+                font-weight: 400;
+                color: #999999;
+              }
+            }
+
+            .popover_container {
+              transition: all 0.3s ease-in-out;
+              visibility: hidden;
+              opacity: 0;
+              z-index: 1;
+              position: absolute;
+              top: 100px;
+              left: 0;
+              width: 100%;
+              background: #000;
+              color: #fff;
+              font-size: 12px;
+              line-height: 18px;
+              padding: 14px;
+              border-radius: 4px;
+              box-sizing: border-box;
+
+              .web-url {
+                color: #fff;
+                display: inline-block;
+                cursor: pointer;
+                margin-top: 10px;
+                word-break: break-word;
+              }
+
+              .web-url:hover {
+                color: $wisburgColor;
+              }
+            }
+
+            .popover_container::after {
+              position: absolute;
+              left: 50%;
+              margin-left: -9px;
+              top: -8px;
+              content: "";
+              width: 17px;
+              height: 17px;
+              transform: rotate(-45deg);
+              background: linear-gradient(45deg, transparent 50%, #000 0%);
+              background-size: 17px 17px;
+              border-top-right-radius: 4px;
+            }
+          }
+
+          .website-item:hover .popover_container {
+            visibility: visible;
+            opacity: 1;
+          }
+
+          .website-item:hover {
+            box-shadow: 0px 0px 10px 0px rgba(39, 38, 51, 0.15);
+          }
+
+          .website-item:hover .website-title {
+            color: $wisburgColor;
+            // box-shadow: 0px 0px 10px 0px rgba(39, 38, 51, 0.15);
+          }
+        }
+      }
+    }
+  }
+}

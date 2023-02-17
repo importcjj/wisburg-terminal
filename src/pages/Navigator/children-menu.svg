@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="11px" viewBox="0 0 8 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60 (88103) - https://sketch.com -->
+    <title>二级菜单</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="网址导航-各种hover状态" transform="translate(-284.000000, -476.000000)" fill-rule="nonzero" stroke="#333333">
+            <g id="二级菜单" transform="translate(285.000000, 476.000000)">
+                <path d="M5.99923121,6.28631834 L1.61782155,9.72885449 C1.18354992,10.0700679 0.554895082,9.99462934 0.213681661,9.56035771 C0.0752501491,9.38417215 -7.49716202e-16,9.16660007 0,8.94253616 L0,2.05746384 C-7.10550097e-16,1.50517909 0.44771525,1.05746384 1,1.05746384 C1.22406391,1.05746384 1.44163599,1.13271399 1.61782155,1.27114551 L5.99923121,4.71368166 C6.43350283,5.05489508 6.50894141,5.68354992 6.16772799,6.11782155 C6.11847893,6.18050218 6.06191183,6.23706928 5.99923121,6.28631834 Z" id="路径"></path>
+            </g>
+        </g>
+    </g>
+</svg>

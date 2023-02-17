@@ -14,6 +14,7 @@ import reportWebVitals from "./reportWebVitals";
 import { AuthLayout } from "./components/AuthLayout";
 import Flow from "./pages/Flow";
 import dayjs from "dayjs";
+import "./assets/iconfont/iconfont.css";
 
 import "antd/dist/reset.css";
 import "./index.css";
@@ -24,6 +25,7 @@ import WithData from "./helpers/with-data";
 // With the Tauri API npm package:
 import { invoke } from "@tauri-apps/api/tauri";
 import WechatLoginCallback from "./pages/wechat/WechatLoginCallback";
+import Navigator from "./pages/Navigator";
 
 document.addEventListener("DOMContentLoaded", () => {
   // This will wait for the window to load, but you could
@@ -52,6 +54,7 @@ export const router = createBrowserRouter(
     >
       <Route path="/" element={<App />}>
         <Route index element={<Flow />} />
+        <Route path="/navigator" element={<Navigator />} />
         <Route path="/settings" element={<Settings />} />
       </Route>
       <Route path="/login" element={<Login />}></Route>

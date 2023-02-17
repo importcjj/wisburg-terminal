@@ -9,7 +9,7 @@
   },
   "package": {
     "productName": "Wisburg",
-    "version": "0.9.9"
+    "version": "0.9.10"
   },
   "tauri": {
     "allowlist": {
@@ -65,15 +65,14 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 700,
-        "minHeight": 600,
+        "height": 590,
+        "minHeight": 590,
         "resizable": true,
         "title": "智堡终端",  
-        "width": 1000,
-        "minWidth": 800,
-        "theme": "Dark",
+        "width": 960,
+        "minWidth": 960,
         "visible": false,
-        "transparent": true
+        "theme": "Dark"
       },
       {
         "width": 400,

@@ -8,7 +8,6 @@ export default () => {
 
   React.useEffect(() => {
     const t = searchParams.get("cookie");
-    console.log(t);
     authByToken(t);
   }, []);
 
