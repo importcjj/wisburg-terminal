@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./index.scss";
 import Menu from "./menu";
 import memuIcon from "./children-menu.svg";
+import { open } from "@tauri-apps/api/shell";
 
 import {
   getNavigatorCategories,
@@ -12,24 +13,24 @@ const Website = ({ url, cover, title, description }) => {
   const handleToSite = (url) => {
     // 手动添加http, 容错
     if (url.indexOf("http") !== -1) {
-      window.open(url);
+      open(url);
     } else {
-      window.open("http://" + url);
+      open("http://" + url);
     }
   };
 
   return (
-    <div class="website-item" onClick={() => handleToSite(url)}>
-      <div class="left">
+    <div className="website-item" onClick={() => handleToSite(url)}>
+      <div className="left">
         <img src={cover} />
       </div>
-      <div class="right">
-        <div class="website-title">{title}</div>
-        <div class="website-desc">{description}</div>
+      <div className="right">
+        <div className="website-title">{title}</div>
+        <div className="website-desc">{description}</div>
       </div>
-      <div class="popover_container">
-        <div class="website-desc">{description}</div>
-        <div class="web-url" onClick={() => handleToSite(url)}>
+      <div className="popover_container">
+        <div className="website-desc">{description}</div>
+        <div className="web-url" onClick={() => handleToSite(url)}>
           {url}
         </div>
       </div>
@@ -47,7 +48,7 @@ const CategoryGroup = ({ title, sites, icon, subCategories }) => {
       {sites && sites.length > 0 && (
         <div className="website-container">
           {sites.map((entry, index) => {
-            return <Website {...entry} />;
+            return <Website {...entry} key={index} />;
           })}
         </div>
       )}
@@ -55,13 +56,13 @@ const CategoryGroup = ({ title, sites, icon, subCategories }) => {
       {subCategories.map((entry, index) => {
         return (
           <div key={index}>
-            <div class="website-sub-category" id={entry.title}>
+            <div className="website-sub-category" id={entry.title}>
               <img src={memuIcon} />
               {entry.title}
             </div>
-            <div class="website-container">
+            <div className="website-container">
               {entry.sites.map((entry, index) => {
-                return <Website {...entry} />;
+                return <Website {...entry} key={index} />;
               })}
             </div>
           </div>
@@ -97,8 +98,8 @@ export default () => {
       <div className="container">
         <div className="container-content">
           <Menu categories={categories} onSeatchTag={onSeatchTag} />
-          <div class="right-container">
-            <div class="website">
+          <div className="right-container">
+            <div className="website">
               {websites.map((group, index) => (
                 <CategoryGroup {...group} key={index} />
               ))}

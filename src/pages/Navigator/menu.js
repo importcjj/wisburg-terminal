@@ -41,16 +41,18 @@ export default ({ categories, onSeatchTag }) => {
                   </span>
                   {item.subCategories && item.subCategories.length > 0 && (
                     <i
-                      className={index == activeIndex && "active"}
+                      className={classnames({ active: index == activeIndex })}
                       onClick={() => setTag(index, item)}
                     ></i>
                   )}
                 </span>
-                <ul className={index == activeIndex && "active"}>
+                <ul className={classnames({ active: index == activeIndex })}>
                   {item.subCategories.map((entry, index) => {
                     return (
                       <li
-                        className={activeTitle == entry.title && "active"}
+                        className={classnames({
+                          active: activeTitle == entry.title,
+                        })}
                         key={index}
                         onClick={() => searchTag(entry.title)}
                       >
